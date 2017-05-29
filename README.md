@@ -20,6 +20,10 @@ In addition this project will include:
 
 ### Wireframes
 
+This app will have a single screen and a very minimal interface. The sole method of user interaction will be to press letter keys to create piano tones and ripples.
+
+![wireframes](images/zenpond.png)
+
 ### Architecture and Technologies
 
 This project will be implemented with the following technologies:
