@@ -1,0 +1,23 @@
+{
+  "name": "ZenPond",
+  "version": "1.0.0",
+  "description": "**NOTE**: I am aware this project may be either too ambitious or make too much use of external libraries, and have backup ideas if that is the case.",
+  "main": "ZenPond.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevoroc/zenpond.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trevoroc/zenpond/issues"
+  },
+  "homepage": "https://github.com/trevoroc/zenpond#readme",
+  "dependencies": {
+    "webpack": "^2.6.1"
+  }
+}
