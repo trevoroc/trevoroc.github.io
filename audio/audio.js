@@ -4,20 +4,30 @@ const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const oscillators = {};
 
 const on = e => {
+  e.preventDefault();
   const keyName = e.key;
-  const oscillator = audioCtx.createOscillator();
+  // console.log(e.key);
 
-  oscillator.frequency.value = KEYS_TO_FREQUENCIES[keyName];
-  oscillator.start(audioCtx.currentTime);
-  oscillator.connect(audioCtx.destination);
-  oscillators[keyName] = oscillator;
+  if (oscillators[keyName] === undefined && KEYS_TO_FREQUENCIES[keyName]) {
+    const oscillator = audioCtx.createOscillator();
+
+    // console.log(keyName);
+    oscillator.frequency.value = KEYS_TO_FREQUENCIES[keyName];
+    oscillator.start(audioCtx.currentTime);
+    oscillator.connect(audioCtx.destination);
+    oscillators[keyName] = oscillator;
+  }
 };
 
 const off = e => {
+  e.preventDefault();
   const keyName = e.key;
-  const oscillator = oscillators[keyName];
+  if (KEYS_TO_FREQUENCIES[keyName]) {
+    const oscillator = oscillators[keyName];
 
-  oscillator.stop(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime);
+    delete oscillators[keyName];
+  }
 };
 
 const addListeners = () => {
