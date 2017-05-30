@@ -1,10 +1,11 @@
 {
   "name": "ZenPond",
   "version": "1.0.0",
-  "description": "**NOTE**: I am aware this project may be either too ambitious or make too much use of external libraries, and have backup ideas if that is the case.",
+  "description": "The idea behind Zen Pond is simple: transport the user away from stress and responsibility with an invitation to experience the simple joy of making music.",
   "main": "ZenPond.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "w": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,9 @@
   },
   "homepage": "https://github.com/trevoroc/zenpond#readme",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
     "webpack": "^2.6.1"
   }
 }

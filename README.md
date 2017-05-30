@@ -1,7 +1,5 @@
 ## Zen Pond
 
-**NOTE**: I am aware this project may be either too ambitious or make too much use of external libraries, and have backup ideas if that is the case.
-
 ### Background
 
 The idea behind Zen Pond is simple: transport the user away from stress and responsibility with an invitation to experience the simple joy of making music. Using their keyboard, the user will strike piano keys, allowing them to make simple ditties and complex melodies alike. Each keystroke will produce a single ripple in a pond filling the entire screen, with the occasional lilypad or cherry blossom floating by. This will be accompanied by soft water sounds, as well as distant chirpings of small birds.
