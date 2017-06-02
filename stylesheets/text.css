@@ -7,7 +7,18 @@ h1 {
   color: #306296;
   top: 4%;
   left: 42%;
-  justify-content: center;
+  /*justify-content: center;*/
+}
+
+h6 {
+  position: absolute;
+  background-color: transparent;
+  z-index: 2;
+  font-family: 'Lobster Two', cursive;
+  font-size: 30px;
+  color: #306296;
+  top: 15%;
+  left: 34%;
 }
 
 .note {
