@@ -1,6 +1,6 @@
 import { mapKeyToLocation } from '../util/util';
 
-export const setUpRipples = () => {
+export const setUpCanvas = () => {
   const canvas = document.getElementById('canvas');
   canvas.width = document.body.clientWidth;
   canvas.height = document.body.clientHeight;
@@ -13,7 +13,7 @@ export const setUpRipples = () => {
   const size = width * (height + 2) * 2;
   const rippleMap = [];
   const prevMap = [];
-  const rippleRadius = 10;
+  const rippleRadius = 20;
   const lineWidth = 20;
   const step = lineWidth * 2;
   const count = height / lineWidth;
@@ -21,17 +21,26 @@ export const setUpRipples = () => {
   let prevIndex = width;
   let newIndex = width * (height + 3);
 
-  ctx.fillStyle = '#a2ddf8';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#07b';
-  ctx.save();
-  ctx.rotate(-0.785);
+  const palette = [
+    '#ddecff',
+    '#c4ddff',
+    '#b4d9ff',
+    '#a4c6f2',
+    '#93c2ff',
+    '#84baff',
+    '#6bacff',
+    '#56a0ff',
+    '#4999ff',
+    '#2d82ef'
+  ];
 
-  for (let i = 0; i < count; i++) {
-    ctx.fillRect(-width, i * step, width * 3, lineWidth);
+  let startHeight, endHeight;
+  for (let i = 0; i < 10; i++) {
+    ctx.fillStyle = palette[i];
+    startHeight = Math.floor(i * canvas.height / 10);
+    endHeight = Math.floor((i + 1) * canvas.height / 10);
+    ctx.fillRect(0, startHeight, canvas.width, endHeight);
   }
-
-  ctx.restore();
 
   const texture = ctx.getImageData(0, 0, width, height);
   const ripple = ctx.getImageData(0, 0, width, height);
