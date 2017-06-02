@@ -36,3 +36,18 @@ export const KEYS_TO_FREQUENCIES = {
   'n': 932.33,
   'm': 987.77
 };
+
+const mapKeyToIndex = key => Object.keys(KEYS_TO_FREQUENCIES).indexOf(key);
+
+export const mapKeyToLocation = (key, width, height) => {
+  const i = mapKeyToIndex(key);
+
+  if (i === -1) {
+    return null;
+  } else {
+    const x = ((i % 6) + 1) * width / 6;
+    const y = (Math.floor(i / 6) + 1) * height / 5;
+
+    return [x, y];
+  }
+};

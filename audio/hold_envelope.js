@@ -28,7 +28,7 @@ class HoldEnvelope {
     this.param.cancelScheduledValues(now);
     this.param.setValueAtTime(0, now);
 
-    console.log('attack');
+    // console.log('attack');
     // debugger;
     // Set attack
     this.param.linearRampToValueAtTime(1, now + this.totalAttackTime());

@@ -1,3 +1,5 @@
+import { mapKeyToLocation } from '../util/util';
+
 export const setUpRipples = () => {
   const canvas = document.getElementById('canvas');
   canvas.width = document.body.clientWidth;
@@ -11,7 +13,7 @@ export const setUpRipples = () => {
   const size = width * (height + 2) * 2;
   const rippleMap = [];
   const prevMap = [];
-  const rippleRadius = 3;
+  const rippleRadius = 10;
   const lineWidth = 20;
   const step = lineWidth * 2;
   const count = height / lineWidth;
@@ -44,6 +46,8 @@ export const setUpRipples = () => {
     ctx.putImageData(ripple, 0, 0);
     window.requestAnimationFrame(run);
   };
+
+  // const randomRadius = () => Math.floor(Math.random * 17) + 3;
 
   // Disturb water at (x, y)
   const disturb = (x, y) => {
@@ -107,11 +111,15 @@ export const setUpRipples = () => {
     }
   };
 
-  // const startRipple = (e) => {
+  const startRipple = (e) => {
+    const key = e.key;
+    const location = mapKeyToLocation(key, width, height);
 
-  // }
+    if (location) { disturb(...mapKeyToLocation(key, width, height)); }
+  };
 
   window.requestAnimationFrame(run);
 
   // set up listeners
+  document.addEventListener('keydown', startRipple);
 };
