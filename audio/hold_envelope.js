@@ -1,41 +1,44 @@
 // NB: The node parameter MUST implement the AudioParam interface from the Web
 // Audio API
 class HoldEnvelope {
-  constructor(node, ctx) {
-    this.node = node;
+  constructor(param, ctx) {
+    this.param = param;
     this.ctx = ctx;
 
     this.attackTime = 0.1;
-    this.decayTime = 0.05;
-    this.sustainTime = 10;
+    this.decayTime = 0.1;
+    this.sustainTime = 5;
   }
 
-  attackTime() {
+  totalAttackTime() {
     return this.attackTime;
   }
 
-  decayTime() {
+  totalDecayTime() {
     return this.attackTime + this.decayTime;
   }
 
-  sustainTime() {
+  totalSustainTime() {
     return this.attackTime + this.decayTime + this.sustainTime;
   }
 
-  trigger() {
+  trigger(stopCallback) {
     const now = this.ctx.currentTime;
 
-    this.node.cancelScheduledValues(now);
-    this.node.setValueAtTime(0, now);
+    this.param.cancelScheduledValues(now);
+    this.param.setValueAtTime(0, now);
 
+    console.log('attack');
+    // debugger;
     // Set attack
-    this.node.linearRampToValue(1, now + this.attackTime());
+    this.param.linearRampToValueAtTime(1, now + this.totalAttackTime());
 
     // Set decay
-    this.node.linearRampToValue(.9, now + this.decayTime());
+    this.param.linearRampToValueAtTime(.6, now + this.totalDecayTime());
 
     // Set sustain
-    this.node.linearRampToValue(0, now + this.sustainTime());
+    this.param.linearRampToValueAtTime(0, now + this.totalSustainTime());
+    stopCallback(this.totalSustainTime());
   }
 }
 

@@ -1,22 +1,22 @@
 class ReleaseEnvelope {
-  constructor(node, ctx) {
-    this.node = node;
+  constructor(param, ctx) {
+    this.param = param;
     this.ctx = ctx;
 
-    this.releaseTime = 0.1;
+    this.releaseTime = 0.25;
   }
 
-  releaseTime() {
+  totalReleaseTime() {
     return this.releaseTime;
   }
 
   trigger() {
     const now = this.ctx.currentTime;
 
-    this.node.cancelScheduledValues(now);
+    this.param.cancelScheduledValues(now);
 
     // Set release
-    this.node.linearRampToValue(0, now + this.releaseTime());
+    this.param.linearRampToValueAtTime(0, now + this.totalReleaseTime());
   }
 }
 

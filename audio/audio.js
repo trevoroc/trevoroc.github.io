@@ -13,29 +13,63 @@ const on = e => {
   if (oscillators[keyName] === undefined && KEYS_TO_FREQUENCIES[keyName]) {
     const oscillator = buildOscillator(KEYS_TO_FREQUENCIES[keyName], audioCtx);
     const gainNode = audioCtx.createGain();
-    const envelope = new HoldEnvelope(gainNode, audioCtx);
+    const envelope = new HoldEnvelope(gainNode.gain, audioCtx);
 
     oscillator.start(audioCtx.currentTime);
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
-    envelope.trigger();
+    envelope.trigger(stopTime => setTimeout(stopOscillator(oscillator, keyName),
+                                            stopTime));
 
     // console.log(keyName);
-    oscillators[keyName] = [
+    oscillators[keyName] = {
       oscillator,
-      new ReleaseEnvelope(gainNode, audioCtx)
-    ];
+      gainNode,
+      release: new ReleaseEnvelope(gainNode.gain, audioCtx)
+    };
+
+    // console.log('on');
+    // clearOscillators();
   }
+
+  console.log(oscillators);
 };
 
 const off = e => {
   const keyName = e.key;
   if (KEYS_TO_FREQUENCIES[keyName]) {
-    const oscillatorArr = oscillators[keyName];
+    const oscillatorObj = oscillators[keyName];
 
-    oscillatorArr[1].trigger();
+    oscillatorObj.release.trigger();
+
+    let releaseTime = oscillatorObj.release.releaseTime;
+    setTimeout(stopOscillator(oscillatorObj.oscillator, keyName),
+               releaseTime);
   }
+
+  console.log('off');
+  // clearOscillators();
 };
+
+const stopOscillator = (oscillator, key) => () => {
+  oscillator.stop(audioCtx.currentTime);
+  delete oscillators[key];
+};
+
+// const clearOscillators = (param) => {
+//   console.log('clearing');
+//   const activeKeys = Object.keys(oscillators);
+//
+//   activeKeys.map(key => {
+//     const entry = oscillators[key];
+//
+//     if (entry.gainNode.gain.value === 0) {
+//       console.log(key);
+//       entry.oscillator.stop(audioCtx.currentTime);
+//       delete oscillators[key];
+//     }
+//   });
+// };
 
 const addListeners = () => {
   document.addEventListener('keydown', on);
