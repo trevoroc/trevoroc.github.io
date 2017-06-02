@@ -104,33 +104,33 @@ var KEYS_TO_FREQUENCIES = exports.KEYS_TO_FREQUENCIES = {
   'm': 1046.50
 };
 
-var KEYS_TO_NOTES = exports.KEYS_TO_NOTES = {
-  'q': 'C',
-  '2': 'C♯',
-  'w': 'D',
-  '3': 'E♭',
-  'e': 'E',
-  'r': 'F',
-  '5': 'F♯',
-  't': 'G',
-  '6': 'A♭',
-  'y': 'A',
-  '7': 'B♭',
-  'u': 'B',
-  'i': 'C',
-  'a': 'C♯',
-  'z': 'D',
-  's': 'E♭',
-  'x': 'E',
-  'c': 'F',
-  'f': 'F♯',
-  'v': 'G',
-  'g': 'A♭',
-  'b': 'A',
-  'h': 'B♭',
-  'n': 'B',
-  'm': 'C'
-};
+// export const KEYS_TO_NOTES = {
+//   'q': 'C',
+//   '2': 'C♯',
+//   'w': 'D',
+//   '3': 'E♭',
+//   'e': 'E',
+//   'r': 'F',
+//   '5': 'F♯',
+//   't': 'G',
+//   '6': 'A♭',
+//   'y': 'A',
+//   '7': 'B♭',
+//   'u': 'B',
+//   'i': 'C',
+//   'a': 'C♯',
+//   'z': 'D',
+//   's': 'E♭',
+//   'x': 'E',
+//   'c': 'F',
+//   'f': 'F♯',
+//   'v': 'G',
+//   'g': 'A♭',
+//   'b': 'A',
+//   'h': 'B♭',
+//   'n': 'B',
+//   'm': 'C'
+// };
 
 var mapKeyToIndex = function mapKeyToIndex(key) {
   return Object.keys(KEYS_TO_FREQUENCIES).indexOf(key);
@@ -142,8 +142,15 @@ var mapKeyToLocation = exports.mapKeyToLocation = function mapKeyToLocation(key,
   if (i === -1) {
     return null;
   } else {
-    var x = (i % 6 + 1) * width / 6;
-    var y = (Math.floor(i / 6) + 1) * height / 5;
+    var xMin = Math.floor(width / 10);
+    var xMax = Math.floor(width * 9 / 10);
+    var yMin = Math.floor(height / 10);
+    var yMax = Math.floor(height * 9 / 10);
+
+    var x = Math.random() * (xMax - xMin) + xMin;
+    var y = Math.random() * (yMax - yMin) + yMin;
+    // const x = ((i % 6) + 1) * width / 6;
+    // const y = (Math.floor(i / 6) + 1) * height / 5;
 
     return [x, y];
   }

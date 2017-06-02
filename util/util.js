@@ -26,33 +26,33 @@ export const KEYS_TO_FREQUENCIES = {
   'm': 1046.50
 };
 
-export const KEYS_TO_NOTES = {
-  'q': 'C',
-  '2': 'C♯',
-  'w': 'D',
-  '3': 'E♭',
-  'e': 'E',
-  'r': 'F',
-  '5': 'F♯',
-  't': 'G',
-  '6': 'A♭',
-  'y': 'A',
-  '7': 'B♭',
-  'u': 'B',
-  'i': 'C',
-  'a': 'C♯',
-  'z': 'D',
-  's': 'E♭',
-  'x': 'E',
-  'c': 'F',
-  'f': 'F♯',
-  'v': 'G',
-  'g': 'A♭',
-  'b': 'A',
-  'h': 'B♭',
-  'n': 'B',
-  'm': 'C'
-};
+// export const KEYS_TO_NOTES = {
+//   'q': 'C',
+//   '2': 'C♯',
+//   'w': 'D',
+//   '3': 'E♭',
+//   'e': 'E',
+//   'r': 'F',
+//   '5': 'F♯',
+//   't': 'G',
+//   '6': 'A♭',
+//   'y': 'A',
+//   '7': 'B♭',
+//   'u': 'B',
+//   'i': 'C',
+//   'a': 'C♯',
+//   'z': 'D',
+//   's': 'E♭',
+//   'x': 'E',
+//   'c': 'F',
+//   'f': 'F♯',
+//   'v': 'G',
+//   'g': 'A♭',
+//   'b': 'A',
+//   'h': 'B♭',
+//   'n': 'B',
+//   'm': 'C'
+// };
 
 const mapKeyToIndex = key => Object.keys(KEYS_TO_FREQUENCIES).indexOf(key);
 
@@ -62,8 +62,15 @@ export const mapKeyToLocation = (key, width, height) => {
   if (i === -1) {
     return null;
   } else {
-    const x = ((i % 6) + 1) * width / 6;
-    const y = (Math.floor(i / 6) + 1) * height / 5;
+    const xMin = Math.floor(width / 10);
+    const xMax = Math.floor(width * 9 / 10);
+    const yMin = Math.floor(height / 10);
+    const yMax = Math.floor(height * 9 / 10);
+
+    const x = Math.random() * (xMax - xMin) + xMin;
+    const y = Math.random() * (yMax - yMin) + yMin;
+    // const x = ((i % 6) + 1) * width / 6;
+    // const y = (Math.floor(i / 6) + 1) * height / 5;
 
     return [x, y];
   }
