@@ -287,7 +287,7 @@ var setUpCanvas = exports.setUpCanvas = function setUpCanvas() {
   var size = width * (height + 2) * 2;
   var rippleMap = [];
   var prevMap = [];
-  var rippleRadius = 20;
+  var rippleRadius = 50;
   var lineWidth = 20;
   var step = lineWidth * 2;
   var count = height / lineWidth;
@@ -399,8 +399,24 @@ var setUpCanvas = exports.setUpCanvas = function setUpCanvas() {
     var location = (0, _util.mapKeyToLocation)(key, width, height);
 
     if (location) {
-      disturb.apply(undefined, _toConsumableArray((0, _util.mapKeyToLocation)(key, width, height)));
+      disturb.apply(undefined, _toConsumableArray(location));
+      showNote.apply(undefined, [key].concat(_toConsumableArray(location)));
     }
+  };
+
+  var showNote = function showNote(key, x, y) {
+    var note = document.getElementsByClassName(key)[0];
+
+    var noteX = x - 47;
+    var noteY = y - 47;
+
+    note.style.left = noteX.toString() + 'px';
+    note.style.top = noteY.toString() + 'px';
+
+    note.classList.toggle('hidden');
+    setTimeout(function () {
+      return note.classList.toggle('hidden');
+    }, 200);
   };
 
   window.requestAnimationFrame(run);

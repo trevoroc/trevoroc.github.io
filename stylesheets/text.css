@@ -9,3 +9,19 @@ h1 {
   left: 42%;
   justify-content: center;
 }
+
+.note {
+  position: absolute;
+  font-family: 'Lobster Two', cursive;
+  font-size: 95px;
+  color: #306296;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}

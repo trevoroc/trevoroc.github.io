@@ -13,7 +13,7 @@ export const setUpCanvas = () => {
   const size = width * (height + 2) * 2;
   const rippleMap = [];
   const prevMap = [];
-  const rippleRadius = 20;
+  const rippleRadius = 50;
   const lineWidth = 20;
   const step = lineWidth * 2;
   const count = height / lineWidth;
@@ -124,7 +124,23 @@ export const setUpCanvas = () => {
     const key = e.key;
     const location = mapKeyToLocation(key, width, height);
 
-    if (location) { disturb(...mapKeyToLocation(key, width, height)); }
+    if (location) {
+      disturb(...location);
+      showNote(key, ...location);
+    }
+  };
+
+  const showNote = (key, x, y) => {
+    const note = document.getElementsByClassName(key)[0];
+
+    const noteX = x - 47;
+    const noteY = y - 47;
+
+    note.style.left = noteX.toString() + 'px';
+    note.style.top = noteY.toString() + 'px';
+
+    note.classList.toggle('hidden');
+    setTimeout(() => (note.classList.toggle('hidden')), 200);
   };
 
   window.requestAnimationFrame(run);
